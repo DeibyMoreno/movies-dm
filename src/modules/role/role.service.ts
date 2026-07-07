@@ -23,4 +23,10 @@ export class RoleService {
 
     return role ? RoleMapper.toDTO(role) : null;
   }
+
+  async create(data: { name: string; description?: string | null }): Promise<RoleDTO> {
+    const role = await this.roleRepository.create(data);
+
+    return RoleMapper.toDTO(role);
+  }
 }

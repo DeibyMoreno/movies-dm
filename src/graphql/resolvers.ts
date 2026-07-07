@@ -26,6 +26,7 @@ export const resolvers = {
   Mutation: {
     ...authResolvers.Mutation,
     ...genreResolvers.Mutation,
+    ...roleResolvers.Mutation,
   },
   Genre: genreResolvers.Genre,
   Movie: movieResolvers.Movie,

@@ -1,8 +1,10 @@
 import type { GenreService } from '../modules/genre/genre.service.js';
+import type { RoleService } from '../modules/role/role.service.js';
 import type { AuthUser } from '../shared/types/index.js';
 
 export interface DIContext {
   genreService: GenreService;
+  roleService: RoleService;
 }
 
 export interface GraphQLContext {

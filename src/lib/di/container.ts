@@ -9,6 +9,8 @@ import {
 
 import type { GenreRepository } from '../../modules/genre/genre.repository.js';
 import type { GenreService } from '../../modules/genre/genre.service.js';
+import type { RoleRepository } from '../../modules/role/role.repository.js';
+import type { RoleService } from '../../modules/role/role.service.js';
 
 export type { AwilixContainer, Resolver };
 
@@ -17,6 +19,8 @@ export { asClass, asFunction, asValue };
 export interface Dependencies {
   genreRepository: GenreRepository;
   genreService: GenreService;
+  roleRepository: RoleRepository;
+  roleService: RoleService;
 }
 
 let container: AwilixContainer | null = null;

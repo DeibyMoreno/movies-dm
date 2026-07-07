@@ -5,7 +5,16 @@ type Role {
   createdAt: DateTime!
 }
 
+input CreateRoleInput {
+  name: String!
+  description: String
+}
+
 extend type Query {
   roles(pagination: PaginationInput): [Role!]!
   role(id: ID!): Role
+}
+
+extend type Mutation {
+  createRole(input: CreateRoleInput!): Role! @auth(role: ADMIN)
 }

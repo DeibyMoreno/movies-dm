@@ -25,6 +25,15 @@ export class RoleRepository {
     return result.rows[0] ?? null;
   }
 
+  async create(data: { name: string; description?: string | null }): Promise<RoleModel> {
+    const result = await query<RoleModel>(
+      'INSERT INTO roles (name, description) VALUES ($1, $2) RETURNING *',
+      [data.name, data.description ?? null],
+    );
+
+    return result.rows[0];
+  }
+
   async countAll(): Promise<number> {
     const result = await query<{ count: string }>('SELECT COUNT(*) as count FROM roles');
 

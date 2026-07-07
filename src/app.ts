@@ -24,6 +24,7 @@ export function createApp(): Express {
         user: ctx.req?.user ?? null,
         di: {
           genreService: container.resolve('genreService'),
+          roleService: container.resolve('roleService'),
         },
       };
     },
