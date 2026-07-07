@@ -1,13 +1,24 @@
+"""
+Temporada de una serie.
+"""
 type Season {
+  """Identificador único UUID."""
   id: ID!
+  """ID de la serie a la que pertenece."""
   serieId: ID!
+  """Número de temporada."""
   number: Int!
+  """Título opcional de la temporada."""
   title: String
+  """Año de estreno de la temporada."""
   releaseYear: Int
+  """Episodios de la temporada."""
   episodes: [Episode!]!
+  """Fecha de creación del registro."""
   createdAt: DateTime!
 }
 
 extend type Query {
+  """Obtiene una temporada por su ID."""
   season(id: ID!): Season
 }

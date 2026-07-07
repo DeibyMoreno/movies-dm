@@ -1,27 +1,49 @@
+"""
+Género cinematográfico (acción, comedia, drama, etc.).
+"""
 type Genre {
+  """Identificador único UUID."""
   id: ID!
+  """Nombre del género."""
   name: String!
+  """Slug único para la URL."""
   slug: String!
+  """Películas asociadas a este género."""
   movies: [Movie!]
+  """Series asociadas a este género."""
   series: [Serie!]
+  """Fecha de creación del registro."""
   createdAt: DateTime!
 }
 
+"""
+Entrada de paginación con página y límite.
+"""
 input PaginationInput {
+  """Número de página (empieza en 1)."""
   page: Int
+  """Elementos por página (máximo 100)."""
   limit: Int
 }
 
+"""
+Datos para crear un nuevo género.
+"""
 input CreateGenreInput {
+  """Nombre del género."""
   name: String!
+  """Slug único para la URL."""
   slug: String!
 }
 
 extend type Query {
+  """Lista todos los géneros ordenados alfabéticamente."""
   genres: [Genre!]!
+  """Obtiene un género por su ID."""
   genre(id: ID!): Genre
 }
 
 extend type Mutation {
+  """Crea un nuevo género (requiere rol ADMIN)."""
   createGenre(input: CreateGenreInput!): Genre!
 }

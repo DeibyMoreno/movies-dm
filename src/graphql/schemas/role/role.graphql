@@ -1,20 +1,37 @@
+"""
+Rol del sistema (USER, ADMIN).
+"""
 type Role {
+  """Identificador único UUID."""
   id: ID!
+  """Nombre del rol."""
   name: String!
+  """Descripción del rol."""
   description: String
+  """Fecha de creación del registro."""
   createdAt: DateTime!
 }
 
+"""
+Datos para crear un nuevo rol.
+"""
 input CreateRoleInput {
+  """Nombre del rol."""
   name: String!
+  """Descripción opcional del rol."""
   description: String
 }
 
 extend type Query {
+  """Lista paginada de roles."""
   roles(pagination: PaginationInput): [Role!]!
+  """Obtiene un rol por su ID."""
   role(id: ID!): Role
 }
 
 extend type Mutation {
+  """
+  Crea un nuevo rol. Requiere permisos de administrador.
+  """
   createRole(input: CreateRoleInput!): Role! @auth(role: ADMIN)
 }

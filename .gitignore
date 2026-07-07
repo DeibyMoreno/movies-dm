@@ -9,3 +9,7 @@ logs/
 coverage/
 .turbo/
 *.tsbuildinfo
+
+# SpectaQL generated docs
+docs/public/
+docs/favicon.png

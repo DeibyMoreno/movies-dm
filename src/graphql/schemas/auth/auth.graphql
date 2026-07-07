@@ -1,20 +1,38 @@
+"""
+Datos de inicio de sesión.
+"""
 input LoginInput {
+  """Correo electrónico del usuario."""
   email: String!
+  """Contraseña del usuario."""
   password: String!
 }
 
+"""
+Datos de registro de nuevo usuario.
+"""
 input RegisterInput {
+  """Correo electrónico del usuario."""
   email: String!
+  """Contraseña del usuario."""
   password: String!
+  """Nombre público del usuario."""
   name: String!
 }
 
+"""
+Token JWT y datos del usuario autenticado.
+"""
 type AuthPayload {
+  """Token JWT de acceso."""
   token: String!
+  """Usuario autenticado."""
   user: User!
 }
 
-type Mutation {
+extend type Mutation {
+  """Inicia sesión con email y contraseña."""
   login(input: LoginInput!): AuthPayload!
+  """Registra un nuevo usuario en la plataforma."""
   register(input: RegisterInput!): AuthPayload!
 }

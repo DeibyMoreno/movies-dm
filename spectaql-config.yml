@@ -1,0 +1,42 @@
+spectaql:
+  faviconFile: ./docs/favicon.png
+  displayAllServers: true
+
+introspection:
+  removeTrailingPeriodFromDescriptions: false
+  schemaFile:
+    - ./src/graphql/schemas/**/*.graphql
+  fieldExpansionDepth: 2
+
+extensions:
+  graphqlScalarExamples: true
+
+info:
+  title: GraphQL Movies & Series API
+  description: |
+    API GraphQL para una plataforma de películas y series.
+    Permite gestionar usuarios, autenticación, catálogo de contenido,
+    géneros, reseñas y favoritos.
+  termsOfService: https://example.com/terms
+  contact:
+    name: Soporte API
+    url: https://example.com/support
+    email: support@example.com
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  x-introItems:
+    - title: Autenticación
+      description: |
+        La API usa JWT (Bearer token) para autenticación.
+        Incluye el token en el header `Authorization: Bearer <token>`.
+        Los endpoints con `@auth` requieren un token válido.
+
+servers:
+  - url: http://localhost:4000/graphql
+    description: Desarrollo local
+    production: false
+    headers:
+      - name: Authorization
+        example: Bearer <TOKEN>
+        comment: Token JWT obtenido de login/register

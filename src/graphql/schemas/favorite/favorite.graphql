@@ -1,14 +1,26 @@
+"""
+Favorito de un usuario (película o serie).
+"""
 type Favorite {
+  """Identificador único UUID."""
   id: ID!
+  """ID del usuario que marcó como favorito."""
   userId: ID!
+  """ID de la película favorita (null si es serie)."""
   movieId: ID
+  """ID de la serie favorita (null si es película)."""
   serieId: ID
+  """Película favorita."""
   movie: Movie
+  """Serie favorita."""
   serie: Serie
+  """Usuario que marcó como favorito."""
   user: User!
+  """Fecha de creación del favorito."""
   createdAt: DateTime!
 }
 
 extend type Query {
+  """Lista paginada de favoritos del usuario autenticado."""
   favorites(pagination: PaginationInput): [Favorite!]!
 }

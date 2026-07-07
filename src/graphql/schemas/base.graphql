@@ -1,9 +1,24 @@
+"""
+Tipo escalar personalizado para fechas en formato ISO-8601.
+"""
 scalar DateTime
 
+"""
+Directiva para proteger campos con autenticación.
+Si se especifica `role`, solo los usuarios con ese rol pueden acceder.
+"""
+directive @auth(role: Role) on FIELD_DEFINITION
+
+"""
+Raíz de consultas. Los tipos se extienden mediante `extend type Query`.
+"""
 type Query {
   _empty: String
 }
 
+"""
+Raíz de mutaciones. Los tipos se extienden mediante `extend type Mutation`.
+"""
 type Mutation {
   _empty: String
 }

@@ -1,20 +1,38 @@
+"""
+Película disponible en el catálogo.
+"""
 type Movie {
+  """Identificador único UUID."""
   id: ID!
+  """Título de la película."""
   title: String!
+  """Slug único para la URL."""
   slug: String!
+  """Sinopsis o descripción de la película."""
   synopsis: String
+  """Año de estreno."""
   releaseYear: Int
+  """Duración en minutos."""
   durationMin: Int
+  """URL del póster de la película."""
   posterUrl: String
+  """URL de la imagen de fondo."""
   backdropUrl: String
+  """Calificación promedio (0-10)."""
   rating: Float
+  """Géneros asociados a la película."""
   genres: [Genre!]!
+  """Reseñas de la película."""
   reviews: [Review!]
+  """Fecha de creación del registro."""
   createdAt: DateTime!
+  """Fecha de última actualización."""
   updatedAt: DateTime!
 }
 
 extend type Query {
+  """Lista paginada de películas."""
   movies(pagination: PaginationInput): [Movie!]!
+  """Obtiene una película por ID o slug."""
   movie(id: ID!, slug: String): Movie
 }

@@ -1,15 +1,28 @@
+"""
+Episodio de una temporada.
+"""
 type Episode {
+  """Identificador único UUID."""
   id: ID!
+  """ID de la temporada a la que pertenece."""
   seasonId: ID!
+  """Número de episodio."""
   number: Int!
+  """Título del episodio."""
   title: String!
+  """Sinopsis del episodio."""
   synopsis: String
+  """Duración en minutos."""
   durationMin: Int
+  """Fecha de estreno del episodio."""
   releaseDate: DateTime
+  """URL del video del episodio."""
   videoUrl: String
+  """Fecha de creación del registro."""
   createdAt: DateTime!
 }
 
 extend type Query {
+  """Obtiene un episodio por su ID."""
   episode(id: ID!): Episode
 }

@@ -19,9 +19,15 @@
     "migrate:create": "node-pg-migrate create --migrations-dir migrations",
     "migrate:up": "node-pg-migrate up --migrations-dir migrations",
     "migrate:down": "node-pg-migrate down --migrations-dir migrations",
-    "prepare": "husky"
+    "prepare": "husky",
+    "docs:generate": "spectaql spectaql-config.yml -t docs/public",
+    "docs:serve": "spectaql spectaql-config.yml -t docs/public -D"
   },
   "dependencies": {
+    "@graphql-tools/load-files": "^7.0.0",
+    "@graphql-tools/merge": "^9.0.0",
+    "@graphql-tools/schema": "^10.0.0",
+    "@graphql-tools/utils": "^10.0.0",
     "awilix": "^12.0.4",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
@@ -29,10 +35,6 @@
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "graphql": "^16.10.0",
-    "@graphql-tools/load-files": "^7.0.0",
-    "@graphql-tools/merge": "^9.0.0",
-    "@graphql-tools/schema": "^10.0.0",
-    "@graphql-tools/utils": "^10.0.0",
     "graphql-yoga": "^5.12.0",
     "helmet": "^8.0.0",
     "jsonwebtoken": "^9.0.2",
@@ -60,6 +62,7 @@
     "husky": "^9.1.7",
     "lint-staged": "^15.4.3",
     "prettier": "^3.5.2",
+    "spectaql": "^3.0.9",
     "tsx": "^4.19.2",
     "typescript": "^5.7.3"
   },

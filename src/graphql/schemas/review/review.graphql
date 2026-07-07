@@ -1,15 +1,28 @@
+"""
+Reseña de una película o serie hecha por un usuario.
+"""
 type Review {
+  """Identificador único UUID."""
   id: ID!
+  """ID del usuario que escribió la reseña."""
   userId: ID!
+  """ID de la película reseñada (null si es reseña de serie)."""
   movieId: ID
+  """ID de la serie reseñada (null si es reseña de película)."""
   serieId: ID
+  """Calificación numérica (1-5)."""
   rating: Int!
+  """Comentario opcional de la reseña."""
   comment: String
+  """Usuario que escribió la reseña."""
   user: User!
+  """Fecha de creación de la reseña."""
   createdAt: DateTime!
 }
 
 extend type Query {
+  """Lista de reseñas, filtrable por película o serie."""
   reviews(movieId: ID, serieId: ID, pagination: PaginationInput): [Review!]!
+  """Obtiene una reseña por su ID."""
   review(id: ID!): Review
 }

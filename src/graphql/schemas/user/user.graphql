@@ -1,22 +1,42 @@
+"""
+Roles disponibles en la plataforma.
+"""
 enum Role {
+  """Usuario estándar."""
   USER
+  """Administrador con permisos especiales."""
   ADMIN
 }
 
+"""
+Usuario registrado en la plataforma.
+"""
 type User {
+  """Identificador único UUID."""
   id: ID!
+  """Correo electrónico del usuario."""
   email: String!
+  """Nombre público del usuario."""
   name: String!
+  """URL del avatar del usuario."""
   avatarUrl: String
+  """Rol del usuario (USER o ADMIN)."""
   role: Role!
+  """Reseñas escritas por el usuario."""
   reviews: [Review!]
+  """Favoritos del usuario."""
   favorites: [Favorite!]
+  """Fecha de creación del usuario."""
   createdAt: DateTime!
+  """Fecha de última actualización."""
   updatedAt: DateTime!
 }
 
 extend type Query {
+  """Lista paginada de usuarios."""
   users(pagination: PaginationInput): [User!]!
+  """Obtiene un usuario por su ID."""
   user(id: ID!): User
+  """Obtiene el perfil del usuario autenticado."""
   me: User
 }
