@@ -3,7 +3,7 @@ export type Role = 'USER' | 'ADMIN';
 export type SerieStatus = 'ONGOING' | 'FINISHED' | 'CANCELED' | 'UPCOMING';
 
 export interface JwtPayload {
-  userId: string;
+  id: string;
   role: Role;
   iat?: number;
   exp?: number;

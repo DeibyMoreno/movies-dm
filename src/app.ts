@@ -4,7 +4,7 @@ import helmet from 'helmet';
 
 import { createGraphQLServer } from './config/graphql.js';
 import { schema } from './graphql/schema.js';
-import { createDIContainer } from './lib/di/container.js';
+import { createDIContainer, type Dependencies } from './lib/di/container.js';
 import { registerDependencies } from './lib/di/register.js';
 import { authMiddleware } from './middlewares/auth.middleware.js';
 import { errorHandler } from './middlewares/errorHandler.middleware.js';
@@ -18,13 +18,15 @@ export function createApp(): Express {
 
   const yoga = createGraphQLServer(schema, {
     context: async (initialContext) => {
-      const ctx = initialContext as { req?: { user?: { id: string; email: string; role: string } } };
+      const ctx = initialContext as { req?: { user?: { id: string; role: string } } };
 
       return {
         user: ctx.req?.user ?? null,
         di: {
-          genreService: container.resolve('genreService'),
-          roleService: container.resolve('roleService'),
+          authService: container.resolve<Dependencies>('authService'),
+          genreService: container.resolve<Dependencies>('genreService'),
+          roleService: container.resolve<Dependencies>('roleService'),
+          userService: container.resolve<Dependencies>('userService'),
         },
       };
     },

@@ -14,7 +14,7 @@ export class AuthService {
   constructor(
     private readonly userRepository: UserRepository,
     private readonly roleRepository: RoleRepository,
-  ) {}
+  ) { }
 
   async login(email: string, password: string): Promise<AuthPayloadDTO> {
     const user = await this.userRepository.findByEmail(email);
@@ -65,6 +65,6 @@ export class AuthService {
     const options: jwt.SignOptions = {
       expiresIn: env.JWT_EXPIRES_IN as jwt.SignOptions['expiresIn'],
     };
-    return jwt.sign({ userId, role }, env.JWT_SECRET, options);
+    return jwt.sign({ id: userId, role }, env.JWT_SECRET, options);
   }
 }

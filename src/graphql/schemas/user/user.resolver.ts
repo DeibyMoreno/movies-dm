@@ -10,7 +10,7 @@ export const userResolvers = {
     },
     me: async (_parent: unknown, _args: unknown, ctx: GraphQLContext) => {
       if (!ctx.user) return null;
-      return ctx.user;
+      return ctx.di.userService.findById(ctx.user.id);
     },
   },
   User: {
