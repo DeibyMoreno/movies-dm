@@ -1,0 +1,22 @@
+enum Role {
+  USER
+  ADMIN
+}
+
+type User {
+  id: ID!
+  email: String!
+  name: String!
+  avatarUrl: String
+  role: Role!
+  reviews: [Review!]
+  favorites: [Favorite!]
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+extend type Query {
+  users(pagination: PaginationInput): [User!]!
+  user(id: ID!): User
+  me: User
+}

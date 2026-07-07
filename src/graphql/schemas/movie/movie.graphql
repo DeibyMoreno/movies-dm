@@ -1,0 +1,20 @@
+type Movie {
+  id: ID!
+  title: String!
+  slug: String!
+  synopsis: String
+  releaseYear: Int
+  durationMin: Int
+  posterUrl: String
+  backdropUrl: String
+  rating: Float
+  genres: [Genre!]!
+  reviews: [Review!]
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+extend type Query {
+  movies(pagination: PaginationInput): [Movie!]!
+  movie(id: ID!, slug: String): Movie
+}

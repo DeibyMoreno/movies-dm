@@ -1,0 +1,15 @@
+type Episode {
+  id: ID!
+  seasonId: ID!
+  number: Int!
+  title: String!
+  synopsis: String
+  durationMin: Int
+  releaseDate: DateTime
+  videoUrl: String
+  createdAt: DateTime!
+}
+
+extend type Query {
+  episode(id: ID!): Episode
+}

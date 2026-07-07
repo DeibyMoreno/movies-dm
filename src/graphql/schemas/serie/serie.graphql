@@ -1,0 +1,28 @@
+enum SerieStatus {
+  ONGOING
+  FINISHED
+  CANCELED
+  UPCOMING
+}
+
+type Serie {
+  id: ID!
+  title: String!
+  slug: String!
+  synopsis: String
+  releaseYear: Int
+  posterUrl: String
+  backdropUrl: String
+  rating: Float
+  status: SerieStatus!
+  genres: [Genre!]!
+  seasons: [Season!]!
+  reviews: [Review!]
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+extend type Query {
+  series(pagination: PaginationInput): [Serie!]!
+  serie(id: ID!, slug: String): Serie
+}

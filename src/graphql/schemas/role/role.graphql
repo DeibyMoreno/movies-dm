@@ -1,0 +1,11 @@
+type Role {
+  id: ID!
+  name: String!
+  description: String
+  createdAt: DateTime!
+}
+
+extend type Query {
+  roles(pagination: PaginationInput): [Role!]!
+  role(id: ID!): Role
+}

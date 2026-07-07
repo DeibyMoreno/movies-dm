@@ -1,0 +1,13 @@
+type Season {
+  id: ID!
+  serieId: ID!
+  number: Int!
+  title: String
+  releaseYear: Int
+  episodes: [Episode!]!
+  createdAt: DateTime!
+}
+
+extend type Query {
+  season(id: ID!): Season
+}

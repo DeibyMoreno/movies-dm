@@ -1,0 +1,15 @@
+type Review {
+  id: ID!
+  userId: ID!
+  movieId: ID
+  serieId: ID
+  rating: Int!
+  comment: String
+  user: User!
+  createdAt: DateTime!
+}
+
+extend type Query {
+  reviews(movieId: ID, serieId: ID, pagination: PaginationInput): [Review!]!
+  review(id: ID!): Review
+}

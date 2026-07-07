@@ -1,0 +1,27 @@
+type Genre {
+  id: ID!
+  name: String!
+  slug: String!
+  movies: [Movie!]
+  series: [Serie!]
+  createdAt: DateTime!
+}
+
+input PaginationInput {
+  page: Int
+  limit: Int
+}
+
+input CreateGenreInput {
+  name: String!
+  slug: String!
+}
+
+extend type Query {
+  genres: [Genre!]!
+  genre(id: ID!): Genre
+}
+
+extend type Mutation {
+  createGenre(input: CreateGenreInput!): Genre!
+}

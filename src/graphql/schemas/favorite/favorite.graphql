@@ -1,0 +1,14 @@
+type Favorite {
+  id: ID!
+  userId: ID!
+  movieId: ID
+  serieId: ID
+  movie: Movie
+  serie: Serie
+  user: User!
+  createdAt: DateTime!
+}
+
+extend type Query {
+  favorites(pagination: PaginationInput): [Favorite!]!
+}
