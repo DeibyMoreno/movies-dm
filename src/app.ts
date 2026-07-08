@@ -8,6 +8,7 @@ import { createDIContainer, type Dependencies } from './lib/di/container.js';
 import { registerDependencies } from './lib/di/register.js';
 import { authMiddleware } from './middlewares/auth.middleware.js';
 import { errorHandler } from './middlewares/errorHandler.middleware.js';
+import { authLimiter, graphqlLimiter } from './middlewares/rateLimiter.middleware.js';
 import { requestLogger } from './middlewares/requestLogger.middleware.js';
 
 export function createApp(): Express {
@@ -37,7 +38,8 @@ export function createApp(): Express {
   app.use(express.json());
   app.use(requestLogger);
   app.use(authMiddleware);
-
+  app.use(yoga.graphqlEndpoint, graphqlLimiter);
+  app.use(yoga.graphqlEndpoint, authLimiter);
   app.use(yoga.graphqlEndpoint, yoga as unknown as RequestHandler);
 
   app.use(errorHandler);

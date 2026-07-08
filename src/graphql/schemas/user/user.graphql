@@ -34,9 +34,9 @@ type User {
 
 extend type Query {
   """Lista paginada de usuarios."""
-  users(pagination: PaginationInput): [User!]!
+  users(pagination: PaginationInput): [User!]! @auth(role: ADMIN)
   """Obtiene un usuario por su ID."""
-  user(id: ID!): User
+  user(id: ID!): User @auth(role: ADMIN)
   """Obtiene el perfil del usuario autenticado."""
-  me: User
+  me: User! @auth
 }

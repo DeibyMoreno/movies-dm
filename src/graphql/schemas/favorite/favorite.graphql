@@ -22,5 +22,5 @@ type Favorite {
 
 extend type Query {
   """Lista paginada de favoritos del usuario autenticado."""
-  favorites(pagination: PaginationInput): [Favorite!]!
+  favorites(pagination: PaginationInput): [Favorite!]! @auth
 }

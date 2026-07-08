@@ -4,11 +4,13 @@ import jwt from 'jsonwebtoken';
 import { env } from '../../config/env.js';
 import { ConflictError } from '../../lib/errors/ConflictError.js';
 import { UnauthorizedError } from '../../lib/errors/UnauthorizedError.js';
+import { ValidationError } from '../../lib/errors/ValidationError.js';
 import type { RoleRepository } from '../role/role.repository.js';
 import { UserMapper } from '../user/user.mapper.js';
 import type { UserRepository } from '../user/user.repository.js';
 
 import { AuthMapper, type AuthPayloadDTO } from './auth.mapper.js';
+import { loginSchema, registerSchema } from './auth.validation.js';
 
 export class AuthService {
   constructor(
@@ -17,6 +19,11 @@ export class AuthService {
   ) { }
 
   async login(email: string, password: string): Promise<AuthPayloadDTO> {
+    const parsed = loginSchema.safeParse({ email, password });
+    if (!parsed.success) {
+      throw new ValidationError('Invalid input', parsed.error.flatten().fieldErrors);
+    }
+
     const user = await this.userRepository.findByEmail(email);
     if (!user) {
       throw new UnauthorizedError('Invalid email or password');
@@ -34,9 +41,14 @@ export class AuthService {
   }
 
   async register(email: string, password: string, name: string): Promise<AuthPayloadDTO> {
+    const parsed = registerSchema.safeParse({ email, password, name });
+    if (!parsed.success) {
+      throw new ValidationError('Invalid input', parsed.error.flatten().fieldErrors);
+    }
+
     const existingUser = await this.userRepository.findByEmail(email);
     if (existingUser) {
-      throw new ConflictError('Email already registered');
+      throw new ConflictError('Registration failed');
     }
 
     const defaultRole = await this.roleRepository.findByName('USER');
