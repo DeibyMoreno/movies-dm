@@ -22,6 +22,11 @@ export class MovieService {
     return movie ? MovieMapper.toDTO(movie) : null;
   }
 
+  async findByGenreId(genreId: string, pagination: PaginationParams): Promise<MovieDTO[]> {
+    const movies = await this.movieRepository.findByGenreId(genreId, pagination);
+    return movies.map(MovieMapper.toDTO);
+  }
+
   async create(data: CreateMovieData): Promise<MovieDTO> {
     const movie = await this.movieRepository.create(data);
     return MovieMapper.toDTO(movie);

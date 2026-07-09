@@ -22,6 +22,11 @@ export class ReviewService {
     return review ? ReviewMapper.toDTO(review) : null;
   }
 
+  async findByUserId(userId: string, pagination: PaginationParams): Promise<ReviewDTO[]> {
+    const reviews = await this.reviewRepository.findByUserId(userId, pagination);
+    return reviews.map(ReviewMapper.toDTO);
+  }
+
   async findAll(pagination: PaginationParams): Promise<ReviewDTO[]> {
     const result = await this.reviewRepository.findAll(pagination);
     return result.map(ReviewMapper.toDTO);

@@ -1,3 +1,4 @@
+import { parsePagination, type PaginationInput } from '../../../lib/helpers/pagination.js';
 import type { GraphQLContext } from '../../context.js';
 
 export const genreResolvers = {
@@ -19,11 +20,21 @@ export const genreResolvers = {
     },
   },
   Genre: {
-    movies: async (_parent: unknown, _args: unknown, _ctx: GraphQLContext) => {
-      return [];
+    movies: async (
+      parent: { id: string },
+      args: { pagination?: PaginationInput | null },
+      ctx: GraphQLContext,
+    ) => {
+      const params = parsePagination(args.pagination);
+      return ctx.di.movieService.findByGenreId(parent.id, params);
     },
-    series: async (_parent: unknown, _args: unknown, _ctx: GraphQLContext) => {
-      return [];
+    series: async (
+      parent: { id: string },
+      args: { pagination?: PaginationInput | null },
+      ctx: GraphQLContext,
+    ) => {
+      const params = parsePagination(args.pagination);
+      return ctx.di.serieService.findByGenreId(parent.id, params);
     },
   },
 };

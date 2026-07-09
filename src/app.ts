@@ -26,6 +26,7 @@ export function createApp(): Express {
         di: {
           authService: container.resolve<Dependencies>('authService'),
           episodeService: container.resolve<Dependencies>('episodeService'),
+          favoriteService: container.resolve<Dependencies>('favoriteService'),
           genreService: container.resolve<Dependencies>('genreService'),
           movieService: container.resolve<Dependencies>('movieService'),
           reviewService: container.resolve<Dependencies>('reviewService'),

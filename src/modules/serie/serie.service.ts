@@ -22,6 +22,11 @@ export class SerieService {
     return serie ? SerieMapper.toDTO(serie) : null;
   }
 
+  async findByGenreId(genreId: string, pagination: PaginationParams): Promise<SerieDTO[]> {
+    const series = await this.serieRepository.findByGenreId(genreId, pagination);
+    return series.map(SerieMapper.toDTO);
+  }
+
   async create(data: CreateSerieData): Promise<SerieDTO> {
     const serie = await this.serieRepository.create(data);
     return SerieMapper.toDTO(serie);

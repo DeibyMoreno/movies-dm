@@ -5,3 +5,9 @@ export interface FavoriteModel {
   serie_id: string | null;
   created_at: Date;
 }
+
+export interface CreateFavoriteData {
+  userId: string;
+  movieId?: string | null;
+  serieId?: string | null;
+}

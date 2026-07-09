@@ -21,11 +21,21 @@ export const userResolvers = {
     },
   },
   User: {
-    reviews: async (_parent: unknown, _args: unknown, _ctx: GraphQLContext) => {
-      return [];
+    reviews: async (
+      parent: { id: string },
+      args: { pagination?: PaginationInput | null },
+      ctx: GraphQLContext,
+    ) => {
+      const params = parsePagination(args.pagination);
+      return ctx.di.reviewService.findByUserId(parent.id, params);
     },
-    favorites: async (_parent: unknown, _args: unknown, _ctx: GraphQLContext) => {
-      return [];
+    favorites: async (
+      parent: { id: string },
+      args: { pagination?: PaginationInput | null },
+      ctx: GraphQLContext,
+    ) => {
+      const params = parsePagination(args.pagination);
+      return ctx.di.favoriteService.findByUserId(parent.id, params);
     },
   },
 };

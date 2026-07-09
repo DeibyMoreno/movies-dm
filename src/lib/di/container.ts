@@ -11,6 +11,8 @@ import type { AuthRepository } from '../../modules/auth/auth.repository.js';
 import type { AuthService } from '../../modules/auth/auth.service.js';
 import type { EpisodeRepository } from '../../modules/episode/episode.repository.js';
 import type { EpisodeService } from '../../modules/episode/episode.service.js';
+import type { FavoriteRepository } from '../../modules/favorite/favorite.repository.js';
+import type { FavoriteService } from '../../modules/favorite/favorite.service.js';
 import type { GenreRepository } from '../../modules/genre/genre.repository.js';
 import type { GenreService } from '../../modules/genre/genre.service.js';
 import type { MovieRepository } from '../../modules/movie/movie.repository.js';
@@ -35,6 +37,8 @@ export interface Dependencies {
   authService: AuthService;
   episodeRepository: EpisodeRepository;
   episodeService: EpisodeService;
+  favoriteRepository: FavoriteRepository;
+  favoriteService: FavoriteService;
   genreRepository: GenreRepository;
   genreService: GenreService;
   movieRepository: MovieRepository;

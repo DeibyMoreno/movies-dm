@@ -20,7 +20,29 @@ type Favorite {
   createdAt: DateTime!
 }
 
+"""
+Resultado de la operación toggleFavorite.
+"""
+type ToggleFavoritePayload {
+  """Indica si el favorito fue agregado (true) o removido (false)."""
+  added: Boolean!
+  """Datos del favorito (null si fue removido)."""
+  favorite: Favorite
+}
+
+input ToggleFavoriteInput {
+  """ID de la película a marcar/desmarcar."""
+  movieId: ID
+  """ID de la serie a marcar/desmarcar."""
+  serieId: ID
+}
+
 extend type Query {
   """Lista paginada de favoritos del usuario autenticado."""
   favorites(pagination: PaginationInput): [Favorite!]! @auth
+}
+
+extend type Mutation {
+  """Agrega o remueve un favorito (toggle). Requiere autenticación."""
+  toggleFavorite(input: ToggleFavoriteInput!): ToggleFavoritePayload! @auth
 }
