@@ -1,5 +1,5 @@
 import cors from 'cors';
-import express, { type Express, type RequestHandler, Router } from 'express';
+import express, { type Express, type RequestHandler } from 'express';
 import helmet from 'helmet';
 
 import { createGraphQLServer } from './config/graphql.js';
@@ -39,23 +39,6 @@ export function createApp(): Express {
     },
   });
 
-  const yogaRouter = Router();
-  yogaRouter.use(
-    helmet({
-      contentSecurityPolicy: {
-        directives: {
-          'style-src': ["'self'", 'unpkg.com'],
-          'script-src': ["'self'", 'unpkg.com', "'unsafe-inline'"],
-          'img-src': ["'self'", 'raw.githubusercontent.com'],
-        },
-      },
-    }),
-  );
-  yogaRouter.use(graphqlLimiter);
-  yogaRouter.use(authLimiter);
-  yogaRouter.use(yoga as unknown as RequestHandler);
-  app.use(yoga.graphqlEndpoint, yogaRouter);
-
   app.use('/docs', express.static('docs/public'));
 
   app.use(helmet());
@@ -63,6 +46,10 @@ export function createApp(): Express {
   app.use(express.json());
   app.use(requestLogger);
   app.use(authMiddleware);
+  app.use(yoga.graphqlEndpoint, graphqlLimiter);
+  app.use(yoga.graphqlEndpoint, authLimiter);
+  app.use(yoga.graphqlEndpoint, yoga as unknown as RequestHandler);
+
   app.use(errorHandler);
 
   return app;
