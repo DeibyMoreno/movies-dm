@@ -20,9 +20,42 @@ type Review {
   createdAt: DateTime!
 }
 
+"""
+Datos para crear una nueva reseña.
+"""
+input CreateReviewInput {
+  """ID de la película (requerido si serieId no está presente)."""
+  movieId: ID
+  """ID de la serie (requerido si movieId no está presente)."""
+  serieId: ID
+  """Calificación numérica (1-5)."""
+  rating: Int!
+  """Comentario opcional."""
+  comment: String
+}
+
+"""
+Datos para actualizar una reseña existente.
+"""
+input UpdateReviewInput {
+  """Calificación numérica (1-5)."""
+  rating: Int
+  """Comentario opcional."""
+  comment: String
+}
+
 extend type Query {
   """Lista de reseñas, filtrable por película o serie."""
   reviews(movieId: ID, serieId: ID, pagination: PaginationInput): [Review!]!
   """Obtiene una reseña por su ID."""
   review(id: ID!): Review
+}
+
+extend type Mutation {
+  """Crea una nueva reseña (requiere autenticación)."""
+  createReview(input: CreateReviewInput!): Review! @auth
+  """Actualiza una reseña existente (requiere autenticación)."""
+  updateReview(id: ID!, input: UpdateReviewInput!): Review! @auth
+  """Elimina una reseña (requiere autenticación)."""
+  deleteReview(id: ID!): Boolean! @auth
 }

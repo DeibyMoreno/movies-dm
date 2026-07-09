@@ -7,3 +7,16 @@ export interface ReviewModel {
   comment: string | null;
   created_at: Date;
 }
+
+export interface CreateReviewData {
+  userId: string;
+  movieId?: string | null;
+  serieId?: string | null;
+  rating: number;
+  comment?: string | null;
+}
+
+export interface UpdateReviewData {
+  rating?: number;
+  comment?: string | null;
+}
