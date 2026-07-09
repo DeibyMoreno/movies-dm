@@ -46,9 +46,62 @@ type Serie {
   updatedAt: DateTime!
 }
 
+"""
+Datos para crear una nueva serie.
+"""
+input CreateSerieInput {
+  """Título de la serie."""
+  title: String!
+  """Slug único para la URL."""
+  slug: String!
+  """Sinopsis o descripción."""
+  synopsis: String
+  """Año de estreno."""
+  releaseYear: Int
+  """URL del póster."""
+  posterUrl: String
+  """URL de la imagen de fondo."""
+  backdropUrl: String
+  """Estado actual de la serie."""
+  status: SerieStatus
+  """Identificadores de los géneros asociados."""
+  genreIds: [ID!]
+}
+
+"""
+Datos para actualizar una serie existente.
+"""
+input UpdateSerieInput {
+  """Título de la serie."""
+  title: String
+  """Slug único para la URL."""
+  slug: String
+  """Sinopsis o descripción."""
+  synopsis: String
+  """Año de estreno."""
+  releaseYear: Int
+  """URL del póster."""
+  posterUrl: String
+  """URL de la imagen de fondo."""
+  backdropUrl: String
+  """Estado actual de la serie."""
+  status: SerieStatus
+  """Identificadores de los géneros asociados."""
+  genreIds: [ID!]
+}
+
 extend type Query {
   """Lista paginada de series."""
   series(pagination: PaginationInput): [Serie!]!
   """Obtiene una serie por ID o slug."""
   serie(id: ID!, slug: String): Serie
+}
+
+extend type Mutation {
+  """Crea una nueva serie (requiere rol ADMIN)."""
+  createSerie(input: CreateSerieInput!): Serie! @auth(role: ADMIN)
+  """Actualiza una serie existente (requiere rol ADMIN)."""
+  updateSerie(id: ID!, input: UpdateSerieInput!): Serie! @auth(role: ADMIN)
+  """Elimina una serie (requiere rol ADMIN)."""
+  deleteSerie(id: ID!): Boolean! @auth(role: ADMIN)
 }

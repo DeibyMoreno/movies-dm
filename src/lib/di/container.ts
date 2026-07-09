@@ -7,6 +7,7 @@ import {
   asValue,
 } from 'awilix';
 
+import type { AuthRepository } from '../../modules/auth/auth.repository.js';
 import type { AuthService } from '../../modules/auth/auth.service.js';
 import type { GenreRepository } from '../../modules/genre/genre.repository.js';
 import type { GenreService } from '../../modules/genre/genre.service.js';
@@ -16,6 +17,10 @@ import type { ReviewRepository } from '../../modules/review/review.repository.js
 import type { ReviewService } from '../../modules/review/review.service.js';
 import type { RoleRepository } from '../../modules/role/role.repository.js';
 import type { RoleService } from '../../modules/role/role.service.js';
+import type { SeasonRepository } from '../../modules/season/season.repository.js';
+import type { SeasonService } from '../../modules/season/season.service.js';
+import type { SerieRepository } from '../../modules/serie/serie.repository.js';
+import type { SerieService } from '../../modules/serie/serie.service.js';
 import type { UserRepository } from '../../modules/user/user.repository.js';
 import type { UserService } from '../../modules/user/user.service.js';
 
@@ -24,6 +29,7 @@ export type { AwilixContainer, Resolver };
 export { asClass, asFunction, asValue };
 
 export interface Dependencies {
+  authRepository: AuthRepository;
   authService: AuthService;
   genreRepository: GenreRepository;
   genreService: GenreService;
@@ -33,6 +39,10 @@ export interface Dependencies {
   reviewService: ReviewService;
   roleRepository: RoleRepository;
   roleService: RoleService;
+  seasonRepository: SeasonRepository;
+  seasonService: SeasonService;
+  serieRepository: SerieRepository;
+  serieService: SerieService;
   userRepository: UserRepository;
   userService: UserService;
 }

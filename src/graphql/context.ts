@@ -3,6 +3,8 @@ import type { GenreService } from '../modules/genre/genre.service.js';
 import type { MovieService } from '../modules/movie/movie.service.js';
 import type { ReviewService } from '../modules/review/review.service.js';
 import type { RoleService } from '../modules/role/role.service.js';
+import type { SeasonService } from '../modules/season/season.service.js';
+import type { SerieService } from '../modules/serie/serie.service.js';
 import type { UserService } from '../modules/user/user.service.js';
 import type { AuthUser } from '../shared/types/index.js';
 
@@ -12,6 +14,8 @@ export interface DIContext {
   movieService: MovieService;
   reviewService: ReviewService;
   roleService: RoleService;
+  seasonService: SeasonService;
+  serieService: SerieService;
   userService: UserService;
 }
 

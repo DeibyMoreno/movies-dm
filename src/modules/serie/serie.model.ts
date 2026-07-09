@@ -13,3 +13,25 @@ export interface SerieModel {
   created_at: Date;
   updated_at: Date;
 }
+
+export interface CreateSerieData {
+  title: string;
+  slug: string;
+  synopsis?: string | null;
+  releaseYear?: number | null;
+  posterUrl?: string | null;
+  backdropUrl?: string | null;
+  status?: SerieStatus;
+  genreIds?: string[];
+}
+
+export interface UpdateSerieData {
+  title?: string;
+  slug?: string;
+  synopsis?: string | null;
+  releaseYear?: number | null;
+  posterUrl?: string | null;
+  backdropUrl?: string | null;
+  status?: SerieStatus;
+  genreIds?: string[];
+}

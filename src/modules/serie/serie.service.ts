@@ -1,6 +1,7 @@
 import type { PaginationParams } from '../../lib/helpers/pagination.js';
 
 import { SerieMapper, type SerieDTO } from './serie.mapper.js';
+import type { CreateSerieData, UpdateSerieData } from './serie.model.js';
 import type { SerieRepository } from './serie.repository.js';
 
 export class SerieService {
@@ -19,5 +20,19 @@ export class SerieService {
   async findBySlug(slug: string): Promise<SerieDTO | null> {
     const serie = await this.serieRepository.findBySlug(slug);
     return serie ? SerieMapper.toDTO(serie) : null;
+  }
+
+  async create(data: CreateSerieData): Promise<SerieDTO> {
+    const serie = await this.serieRepository.create(data);
+    return SerieMapper.toDTO(serie);
+  }
+
+  async update(id: string, data: UpdateSerieData): Promise<SerieDTO | null> {
+    const serie = await this.serieRepository.update(id, data);
+    return serie ? SerieMapper.toDTO(serie) : null;
+  }
+
+  async delete(id: string): Promise<boolean> {
+    return this.serieRepository.delete(id);
   }
 }
