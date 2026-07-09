@@ -14,6 +14,11 @@ export class GenreService {
     return genre ? GenreMapper.toDTO(genre) : null;
   }
 
+  async findByMovieId(movieId: string): Promise<GenreDTO[]> {
+    const genres = await this.genreRepository.findByMovieId(movieId);
+    return genres.map(GenreMapper.toDTO);
+  }
+
   async create(data: { name: string; slug: string }): Promise<GenreDTO> {
     const genre = await this.genreRepository.create(data);
     return GenreMapper.toDTO(genre);

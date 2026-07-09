@@ -10,6 +10,10 @@ import {
 import type { AuthService } from '../../modules/auth/auth.service.js';
 import type { GenreRepository } from '../../modules/genre/genre.repository.js';
 import type { GenreService } from '../../modules/genre/genre.service.js';
+import type { MovieRepository } from '../../modules/movie/movie.repository.js';
+import type { MovieService } from '../../modules/movie/movie.service.js';
+import type { ReviewRepository } from '../../modules/review/review.repository.js';
+import type { ReviewService } from '../../modules/review/review.service.js';
 import type { RoleRepository } from '../../modules/role/role.repository.js';
 import type { RoleService } from '../../modules/role/role.service.js';
 import type { UserRepository } from '../../modules/user/user.repository.js';
@@ -23,6 +27,10 @@ export interface Dependencies {
   authService: AuthService;
   genreRepository: GenreRepository;
   genreService: GenreService;
+  movieRepository: MovieRepository;
+  movieService: MovieService;
+  reviewRepository: ReviewRepository;
+  reviewService: ReviewService;
   roleRepository: RoleRepository;
   roleService: RoleService;
   userRepository: UserRepository;

@@ -3,6 +3,7 @@ import { createYoga, type YogaServerOptions } from 'graphql-yoga';
 
 import type { GraphQLContext } from '../graphql/context.js';
 import { AppError } from '../lib/errors/AppError.js';
+import { ValidationError } from '../lib/errors/ValidationError.js';
 
 import { env } from './env.js';
 
@@ -21,12 +22,16 @@ export function createGraphQLServer(schema: GraphQLSchema, options?: YogaOptions
           : error;
 
         if (originalError instanceof AppError) {
-          return new GraphQLError(originalError.message, {
-            extensions: {
-              code: originalError.code,
-              http: { status: originalError.statusCode },
-            },
-          });
+          const extensions: Record<string, unknown> = {
+            code: originalError.code,
+            http: { status: originalError.statusCode },
+          };
+
+          if (originalError instanceof ValidationError && originalError.details) {
+            extensions.details = originalError.details;
+          }
+
+          return new GraphQLError(originalError.message, { extensions });
         }
 
         return new GraphQLError(isDev ? message : 'Unexpected error.');

@@ -11,3 +11,25 @@ export interface MovieModel {
   created_at: Date;
   updated_at: Date;
 }
+
+export interface CreateMovieData {
+  title: string;
+  slug: string;
+  synopsis?: string | null;
+  releaseYear?: number | null;
+  durationMin?: number | null;
+  posterUrl?: string | null;
+  backdropUrl?: string | null;
+  genreIds?: string[];
+}
+
+export interface UpdateMovieData {
+  title?: string;
+  slug?: string;
+  synopsis?: string | null;
+  releaseYear?: number | null;
+  durationMin?: number | null;
+  posterUrl?: string | null;
+  backdropUrl?: string | null;
+  genreIds?: string[];
+}

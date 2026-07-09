@@ -30,9 +30,62 @@ type Movie {
   updatedAt: DateTime!
 }
 
+"""
+Datos para crear una nueva película.
+"""
+input CreateMovieInput {
+  """Título de la película."""
+  title: String!
+  """Slug único para la URL."""
+  slug: String!
+  """Sinopsis o descripción."""
+  synopsis: String
+  """Año de estreno."""
+  releaseYear: Int
+  """Duración en minutos."""
+  durationMin: Int
+  """URL del póster."""
+  posterUrl: String
+  """URL de la imagen de fondo."""
+  backdropUrl: String
+  """Identificadores de los géneros asociados."""
+  genreIds: [ID!]
+}
+
+"""
+Datos para actualizar una película existente.
+"""
+input UpdateMovieInput {
+  """Título de la película."""
+  title: String
+  """Slug único para la URL."""
+  slug: String
+  """Sinopsis o descripción."""
+  synopsis: String
+  """Año de estreno."""
+  releaseYear: Int
+  """Duración en minutos."""
+  durationMin: Int
+  """URL del póster."""
+  posterUrl: String
+  """URL de la imagen de fondo."""
+  backdropUrl: String
+  """Identificadores de los géneros asociados."""
+  genreIds: [ID!]
+}
+
 extend type Query {
   """Lista paginada de películas."""
   movies(pagination: PaginationInput): [Movie!]!
   """Obtiene una película por ID o slug."""
   movie(id: ID!, slug: String): Movie
+}
+
+extend type Mutation {
+  """Crea una nueva película (requiere rol ADMIN)."""
+  createMovie(input: CreateMovieInput!): Movie! @auth(role: ADMIN)
+  """Actualiza una película existente (requiere rol ADMIN)."""
+  updateMovie(id: ID!, input: UpdateMovieInput!): Movie! @auth(role: ADMIN)
+  """Elimina una película (requiere rol ADMIN)."""
+  deleteMovie(id: ID!): Boolean! @auth(role: ADMIN)
 }

@@ -26,6 +26,8 @@ export function createApp(): Express {
         di: {
           authService: container.resolve<Dependencies>('authService'),
           genreService: container.resolve<Dependencies>('genreService'),
+          movieService: container.resolve<Dependencies>('movieService'),
+          reviewService: container.resolve<Dependencies>('reviewService'),
           roleService: container.resolve<Dependencies>('roleService'),
           userService: container.resolve<Dependencies>('userService'),
         },
