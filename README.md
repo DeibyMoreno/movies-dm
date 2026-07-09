@@ -14,6 +14,7 @@ Backend API para una plataforma de películas y series construida con **Node.js*
 - **Logger:** Pino
 - **Migrations:** node-pg-migrate
 - **Infra:** Docker, GitHub Actions
+- **Deploy:** Backend en Render, PostgreSQL en Neon
 
 ## Requisitos
 
@@ -67,3 +68,10 @@ src/
 ├── shared/          # Types and constants
 └── database/        # Migrations and seeds
 ```
+
+## Deploy
+
+- **Base de datos:** PostgreSQL desplegada en [Neon](https://neon.tech)
+- **Backend:** API desplegada en [Render](https://render.com)
+
+Las variables de entorno necesarias en producción (`DATABASE_URL`, `JWT_SECRET`, etc.) se configuran directamente en cada plataforma.
