@@ -2,6 +2,8 @@ import { asClass, type AwilixContainer } from 'awilix';
 
 import { AuthRepository } from '../../modules/auth/auth.repository.js';
 import { AuthService } from '../../modules/auth/auth.service.js';
+import { EpisodeRepository } from '../../modules/episode/episode.repository.js';
+import { EpisodeService } from '../../modules/episode/episode.service.js';
 import { GenreRepository } from '../../modules/genre/genre.repository.js';
 import { GenreService } from '../../modules/genre/genre.service.js';
 import { MovieRepository } from '../../modules/movie/movie.repository.js';
@@ -21,6 +23,8 @@ export function registerDependencies(container: AwilixContainer): void {
   container.register({
     authRepository: asClass(AuthRepository).singleton(),
     authService: asClass(AuthService).singleton(),
+    episodeRepository: asClass(EpisodeRepository).singleton(),
+    episodeService: asClass(EpisodeService).singleton(),
     genreRepository: asClass(GenreRepository).singleton(),
     genreService: asClass(GenreService).singleton(),
     movieRepository: asClass(MovieRepository).singleton(),

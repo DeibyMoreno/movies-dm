@@ -18,7 +18,42 @@ type Season {
   createdAt: DateTime!
 }
 
+"""
+Datos para crear una nueva temporada.
+"""
+input CreateSeasonInput {
+  """ID de la serie a la que pertenece."""
+  serieId: ID!
+  """Número de temporada."""
+  number: Int!
+  """Título opcional de la temporada."""
+  title: String
+  """Año de estreno de la temporada."""
+  releaseYear: Int
+}
+
+"""
+Datos para actualizar una temporada existente.
+"""
+input UpdateSeasonInput {
+  """Número de temporada."""
+  number: Int
+  """Título opcional de la temporada."""
+  title: String
+  """Año de estreno de la temporada."""
+  releaseYear: Int
+}
+
 extend type Query {
   """Obtiene una temporada por su ID."""
   season(id: ID!): Season
+}
+
+extend type Mutation {
+  """Crea una nueva temporada (requiere rol ADMIN)."""
+  createSeason(input: CreateSeasonInput!): Season! @auth(role: ADMIN)
+  """Actualiza una temporada existente (requiere rol ADMIN)."""
+  updateSeason(id: ID!, input: UpdateSeasonInput!): Season! @auth(role: ADMIN)
+  """Elimina una temporada (requiere rol ADMIN)."""
+  deleteSeason(id: ID!): Boolean! @auth(role: ADMIN)
 }

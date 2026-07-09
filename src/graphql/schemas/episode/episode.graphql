@@ -22,7 +22,54 @@ type Episode {
   createdAt: DateTime!
 }
 
+"""
+Datos para crear un nuevo episodio.
+"""
+input CreateEpisodeInput {
+  """ID de la temporada a la que pertenece."""
+  seasonId: ID!
+  """Número de episodio."""
+  number: Int!
+  """Título del episodio."""
+  title: String!
+  """Sinopsis del episodio."""
+  synopsis: String
+  """Duración en minutos."""
+  durationMin: Int
+  """Fecha de estreno del episodio."""
+  releaseDate: DateTime
+  """URL del video del episodio."""
+  videoUrl: String
+}
+
+"""
+Datos para actualizar un episodio existente.
+"""
+input UpdateEpisodeInput {
+  """Número de episodio."""
+  number: Int
+  """Título del episodio."""
+  title: String
+  """Sinopsis del episodio."""
+  synopsis: String
+  """Duración en minutos."""
+  durationMin: Int
+  """Fecha de estreno del episodio."""
+  releaseDate: DateTime
+  """URL del video del episodio."""
+  videoUrl: String
+}
+
 extend type Query {
   """Obtiene un episodio por su ID."""
   episode(id: ID!): Episode
+}
+
+extend type Mutation {
+  """Crea un nuevo episodio (requiere rol ADMIN)."""
+  createEpisode(input: CreateEpisodeInput!): Episode! @auth(role: ADMIN)
+  """Actualiza un episodio existente (requiere rol ADMIN)."""
+  updateEpisode(id: ID!, input: UpdateEpisodeInput!): Episode! @auth(role: ADMIN)
+  """Elimina un episodio (requiere rol ADMIN)."""
+  deleteEpisode(id: ID!): Boolean! @auth(role: ADMIN)
 }

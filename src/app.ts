@@ -25,6 +25,7 @@ export function createApp(): Express {
         user: ctx.req?.user ?? null,
         di: {
           authService: container.resolve<Dependencies>('authService'),
+          episodeService: container.resolve<Dependencies>('episodeService'),
           genreService: container.resolve<Dependencies>('genreService'),
           movieService: container.resolve<Dependencies>('movieService'),
           reviewService: container.resolve<Dependencies>('reviewService'),

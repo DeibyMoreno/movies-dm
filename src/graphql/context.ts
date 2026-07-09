@@ -1,4 +1,5 @@
 import type { AuthService } from '../modules/auth/auth.service.js';
+import type { EpisodeService } from '../modules/episode/episode.service.js';
 import type { GenreService } from '../modules/genre/genre.service.js';
 import type { MovieService } from '../modules/movie/movie.service.js';
 import type { ReviewService } from '../modules/review/review.service.js';
@@ -10,6 +11,7 @@ import type { AuthUser } from '../shared/types/index.js';
 
 export interface DIContext {
   authService: AuthService;
+  episodeService: EpisodeService;
   genreService: GenreService;
   movieService: MovieService;
   reviewService: ReviewService;
