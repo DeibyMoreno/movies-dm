@@ -33,6 +33,13 @@ info:
         Los endpoints con `@auth` requieren un token válido.
 
 servers:
+  - url: https://movies-dm.onrender.com/graphql
+    description: Producción
+    production: true
+    headers:
+      - name: Authorization
+        example: Bearer <TOKEN>
+        comment: Token JWT obtenido de login/register
   - url: http://localhost:4000/graphql
     description: Desarrollo local
     production: false
